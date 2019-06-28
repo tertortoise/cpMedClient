@@ -1,0 +1,12 @@
+.Search {
+  input {
+    
+  }
+ 
+  span.Empty {
+    visibility: hidden;
+  }
+  input:invalid {
+    background-color: red;
+  }
+}

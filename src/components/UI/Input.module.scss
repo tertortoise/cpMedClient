@@ -1,0 +1,64 @@
+.Input {
+  label {
+    .LabelSpan {
+      color: grey;
+    }
+    .InputSpan {
+      input {
+        &:read-only {
+          background-color: lightgray;
+        }
+      }
+      span {
+
+      }
+    }
+  }
+}
+
+.Editable {
+  label {
+    .LabelSpan {
+      color: black;
+    }
+    .InputSpan {
+      input {
+        background-color: lightblue;
+      }
+      span {
+
+      }
+    }
+  }
+}
+
+.Touched {
+  label {
+    .LabelSpan {
+
+    }
+    .InputSpan {
+      input {
+        background-color: lightgreen;
+      }
+      span {
+
+      }
+    }
+  }
+}
+.Invalid {
+  label {
+    .LabelSpan {
+
+    }
+    .InputSpan {
+      input {
+        background-color: pink;
+      }
+      span {
+
+      }
+    }
+  }
+}

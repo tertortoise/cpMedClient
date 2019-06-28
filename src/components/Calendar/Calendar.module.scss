@@ -1,0 +1,8 @@
+.CustomCalendar {
+  border-radius: 1rem;
+  button {
+    &:disabled {
+      color: grey;
+    }
+  }
+}
