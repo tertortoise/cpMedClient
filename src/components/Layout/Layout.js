@@ -1,5 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {
+  Avatar,
   Grid,
   Hidden,
   Paper,
@@ -20,20 +23,22 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  ListItemAvatar,
 } from '@material-ui/core';
 import {
-  Home,
-  Mood,
-  Phone,
   Alarm,
+  Ballot,
+  Create,
+  Home,
   LocationOn,
-  Menu,
+  Mood,
   MoreHoriz,
+  Menu,
+  Person,
+  Phone,
 } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-
-import MenuLink from './MenuLink';
 
 const drawerWidth = 200;
 const useStyles = makeStyles((theme) => ({
@@ -45,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       width: drawerWidth,
       flexShrink: 0,
+    },
+    '& a:active': {
+      backgroundColor: 'green',
     },
   },
   drawerPaper: {
@@ -113,6 +121,11 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
     },
   },
+  listItemRoot: {
+    '&.Mui-disabled': {
+      opacity: 1,
+    }
+  },
   content: {
     marginTop: '140px',
     marginLeft: drawerWidth,
@@ -129,7 +142,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     '& footer': {
-      position: 'sticky',
+      position: 'fixed',
       bottom: 0,
       width: `calc(100% - ${drawerWidth}px)`,
       backgroundColor: theme.palette.primary.A700,
@@ -140,7 +153,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Layout(props) {
+function Layout(props) {
   const theme = useTheme();
   const classes = useStyles();
   const mainMenu = {
@@ -210,7 +223,7 @@ export default function Layout(props) {
   }
 
   /** handling main menu (MM) open, close */
-  const [mmOpen, setMMOpen] = React.useState(false);
+  const [mmOpen, setMMOpen] = useState(false);
   const mmRef = React.useRef(null);
   function handleMMToggle() {
     setMMOpen((prevOpen) => !prevOpen);
@@ -226,7 +239,11 @@ export default function Layout(props) {
 
   const menuItems = mainMenu[currentWidth].map((item) => {
     const classNameActive = item === mainMenu.cabinet ? 'activeLink' : null;
-    return <span key={item.eng} className={classes[classNameActive]}>{item.name}</span>;
+    return (
+      <span key={item.eng} className={classes[classNameActive]}>
+        {item.name}
+      </span>
+    );
   });
   /** slide down main menu items */
   const mmItems = mainMenu.xl.map((item) => {
@@ -235,19 +252,83 @@ export default function Layout(props) {
   });
 
   /** handling drawer */
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
   }
+  /** handling selection of sidebar items */
 
+  // const [selectedMenuItem, setSelectedMenuItem] = useState(
+  //   props.location.pathname
+  // );
+  // useEffect(() => {
+  //   setSelectedMenuItem(props.location.pathname);
+  // });
+  const handleMenuClick = (path) => (e) => { 
+    props.history.push(path);
+  };
   const drawer = (
-    <List>
-      <MenuLink to='/' primary="Кабинет" icon={<Home />}  />
-      
+    <List className={classes.list}>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar src={props.personalImage} />
+        </ListItemAvatar>
+        <ListItemText secondary={`${props.surname} ${props.firstName} ${props.middleName}`} />
+      </ListItem>
+      <ListItem
+        button
+        onClick={handleMenuClick('/')}
+        selected={props.location.pathname === '/'}
+        disabled={props.location.pathname === '/'}
+        className={classes.listItemRoot}
+      >
+        <ListItemIcon>
+          <Home />
+        </ListItemIcon>
+        <ListItemText primary='Кабинет' />
+      </ListItem>
+      <ListItem
+        button
+        onClick={handleMenuClick('/apptEditor')}
+        selected={props.location.pathname === '/apptEditor'}
+        disabled={props.location.pathname === '/apptEditor'}
+        className={classes.listItemRoot}
+      >
+        <ListItemIcon>
+          <Create />
+        </ListItemIcon>
+        <ListItemText primary='Записаться на прием к врачу' />
+      </ListItem>
+      <ListItem
+        button
+        onClick={handleMenuClick('/apptsList')}
+        selected={props.location.pathname === '/apptsList'}
+        disabled={props.location.pathname === '/apptsList'}
+        className={classes.listItemRoot}
+      >
+        <ListItemIcon>
+          <Ballot />
+        </ListItemIcon>
+        <ListItemText primary='Мои записи' />
+      </ListItem>
+      <ListItem
+        button
+        onClick={handleMenuClick('/personal')}
+        selected={props.location.pathname === '/personal'}
+        disabled={props.location.pathname === '/personal'}
+        className={classes.listItemRoot}
+      >
+        <ListItemIcon>
+          <Person />
+        </ListItemIcon>
+        <ListItemText primary='Личные данные' />
+      </ListItem>
+      {/* <MenuLink to='/' primary="Кабинет" icon={} onClick={handleMenuClick('cabinet')} />
+      <MenuLink to='/apptEditor' primary="Записаться на прием" icon={<Create />}  />
+      <MenuLink to='/apptsList' primary="Мои записи" icon={<Ballot />}  /> */}
     </List>
   );
-
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar}>
@@ -367,6 +448,8 @@ export default function Layout(props) {
                 variant='outlined'
                 size='small'
                 className={classes.button}
+                onClick={handleMenuClick('/apptEditor')}
+                disabled={props.location.pathname === '/apptEditor'}
               >
                 <span>Записаться</span>
                 <span>на прием</span>
@@ -406,17 +489,23 @@ export default function Layout(props) {
         </Hidden>
       </nav>
       <div className={classes.content}>
-        <main >
-          {props.children}
-        </main>
-        <footer className={classes.footer}>
-          <Typography paragraph>
-            FOOTER Consequat mauris nunc congue nisi vitae suscipit. Fringilla
-            est ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-            
-          </Typography>
-        </footer>
+        <main>{props.children}</main>
+        {/* <footer className={classes.footer}>
+          
+        </footer> */}
       </div>
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    personalImage: state.personalImage,
+    surname: state.personalData.surname,
+    firstName: state.personalData.firstName,
+    middleName: state.personalData.middleName,
+  };
+};
+
+export default connect(
+  mapStateToProps
+)(withRouter(Layout));

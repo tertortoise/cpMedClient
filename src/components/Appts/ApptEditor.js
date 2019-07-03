@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -453,10 +453,6 @@ class ApptEditor extends Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log('APPTEDITOR UPDATED');
-  }
-  
 
   componentWillUnmount() {
     this.props.editAppt({ initialStage: 'specialities' });
@@ -638,7 +634,7 @@ class ApptEditor extends Component {
     );
 
     return (
-      <div>
+      <Fragment>
         <ApptProgress
           stageChangeHandler={this.stageChangeHandler}
           activeStage={this.state.activeStage}
@@ -646,7 +642,7 @@ class ApptEditor extends Component {
         {btnBack}
         {btnNext}
         {stagePage}
-      </div>
+      </Fragment>
     );
   }
 }

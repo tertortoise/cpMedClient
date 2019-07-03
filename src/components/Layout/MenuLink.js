@@ -9,10 +9,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 const Link = React.forwardRef((props, ref) => <RouterLink {...props} innerRef={ref} />);
 
 export default function MenuLink(props) {
-  const { primary, to, icon } = props;
+  const { primary, to, icon, handleMenuClick } = props;
   return (
     <li>
-      <ListItem button component={Link} to={to}>
+      <ListItem button component={Link} to={to} onClick={handleMenuClick}>
         <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText primary={primary} />
       </ListItem>

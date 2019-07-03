@@ -26,18 +26,18 @@ class App extends Component {
         <CssBaseline />
         <Layout>
           <Switch>
-            <Route path='/' exact render={(props) => <Dash {...props} />} />
+            <Route path='/' exact component={Dash} />
             <Route
               path='/apptEditor'
-              render={(props) => <ApptEditor {...props} />}
+              component={ApptEditor}
             />
             <Route
               path='/apptsList'
-              render={(props) => <ApptsList {...props} />}
+              component={ApptsList}
             />
             <Route
               path='/personal'
-              render={(props) => <Personal {...props} />}
+              component={Personal}
             />
           </Switch>
         </Layout>
