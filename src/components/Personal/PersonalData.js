@@ -7,7 +7,6 @@ import validate from '../../utils/inputValidation';
 import styles from './Personal.module.scss';
 import Button from '../UI/Button';
 import Input from '../UI/Input';
-import { thisExpression } from '@babel/types';
 
 class PersonalData extends Component {
   state = {
