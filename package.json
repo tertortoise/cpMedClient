@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react-dom": "^16.8.6",
-    "react-redux": "^7.0.3",
-    "react-router-dom": "^5.0.0",
+    "@material-ui/core": "^4.1.3",
+    "@material-ui/icons": "^4.2.1",
+    "focus-trap-react": "^6.0.0",
     "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-calendar": "^2.19.0",
-    "redux": "^4.0.1",
-    "focus-trap-react": "^6.0.0"
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.0.3",
+    "react-router-dom": "^5.0.0",
+    "redux": "^4.0.1"
   },
   "scripts": {
     "start": "node scripts/start.js",
@@ -84,10 +86,10 @@
     "ts-pnp": "1.1.2",
     "url-loader": "1.1.2",
     "webpack": "4.29.6",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-dev-server": "3.2.1",
     "webpack-manifest-plugin": "2.0.4",
-    "workbox-webpack-plugin": "4.2.0",
-    "webpack-bundle-analyzer": "^3.3.2"
+    "workbox-webpack-plugin": "4.2.0"
   },
   "jest": {
     "collectCoverageFrom": [

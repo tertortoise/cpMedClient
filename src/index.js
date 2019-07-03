@@ -7,6 +7,8 @@ import App from './App';
 import { Provider } from 'react-redux';
 import ErrorBoundary from './error/ErrorBoundary';
 import store from './store';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import theme from './theme';
 
 //const fetchDoctorsService = new DoctorsService();
 const value = null; // service for fetching data
@@ -14,9 +16,11 @@ const value = null; // service for fetching data
 ReactDOM.render(
   <Provider store={store}>
     <ErrorBoundary>
-        <BrowserRouter>
+      <BrowserRouter>
+        <MuiThemeProvider theme={theme}>
           <App />
-        </BrowserRouter>
+        </MuiThemeProvider>
+      </BrowserRouter>
     </ErrorBoundary>
   </Provider>,
   document.getElementById('root')

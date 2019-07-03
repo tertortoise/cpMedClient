@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
@@ -18,7 +18,6 @@ class Dash extends Component {
 
 
   render() {
-    console.log(this.props);
     /** active appointments */
     let apptsContents, apptsList;
     if (!this.props.appts || this.props.appts.length === 0) {
@@ -53,7 +52,7 @@ class Dash extends Component {
     }
 
     return (
-      <main className={styles.Dash}>
+      <Fragment>
         <div onClick={(e) => this.clickHandler(e, '/apptsList')} className={styles.Section}>
           <h2>Запланированные записи</h2>
           {apptsContents}
@@ -65,7 +64,7 @@ class Dash extends Component {
         <div className={styles.Calendar}>
           <ReactCalendar />
         </div>
-      </main>
+      </Fragment>
     );
   }
 }
