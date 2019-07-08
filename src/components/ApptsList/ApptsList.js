@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
 import { fetchScheduleGen, fetchAppts, editAppt } from '../../actions/actions';
 import arraySortByProp from '../../utils/arraySortByProp';
@@ -8,6 +9,7 @@ import Search from '../UI/Search';
 import Filter from './ApptsListFilter';
 import SelectableButton from '../UI/SelectableButton';
 import ApptsListLine from './ApptsListLine';
+import styles from './ApptsList.module.scss';
 
 class ApptsList extends Component {
   state = {
@@ -128,35 +130,41 @@ class ApptsList extends Component {
 
     return (
       <Fragment>
-        <Filter
-          renderButtons={(btnId, btnName) => (
-            // <Button
-            //   key={btnId}
-            //   btnName={btnName}
-            //   selected={btnId === this.state.filterId}
-            //   btnTypes={['Switch']}
-            //   clickHandler={(e) => this.changeFilterHandler(e, btnId)}
-            // />
-            <SelectableButton
-              size="small"
-              variant='outlined'
-              color='primary'
-              selected={btnId === this.state.filterId}
-              onClick={(e) => this.changeFilterHandler(e, btnId)}
-            >
-              {btnName}
-            </SelectableButton>
-          )}
-          filterId={this.state.filterId}
-        />
-        <Search
-          value={this.state.search.value}
-          empty={this.state.search.empty}
-          disabled={searchDisabled}
-          label='Для поиска вводите буквы русского алфавита'
-          placeholder='Поиск по ФИО и специальности врача'
-          changeSearchHandler={this.changeSearchHandler}
-        />
+        <div className={styles.Container}>
+          <Filter
+            renderButtons={(btnId, btnName) => (
+              <div className={styles.Item}>
+                <SelectableButton
+                size='small'
+                variant='outlined'
+                color='primary'
+                selected={btnId === this.state.filterId}
+                onClick={(e) => this.changeFilterHandler(e, btnId)}
+              >
+                {btnName}
+              </SelectableButton>
+              </div>
+              
+            )}
+            filterId={this.state.filterId}
+          />
+          <div className={clsx(styles.Item, styles.ML)}>
+            <Search
+              id='search_in_apptsList'
+              value={this.state.search.value}
+              placeholder='Буквы русского алфавита, пробел'
+              disabled={searchDisabled}
+              helperText={
+                this.state.search.empty
+                  ? null
+                  : 'Буквы русского алфавита, пробел'
+              }
+              label='ФИО / специальность'
+              changeSearchHandler={this.changeSearchHandler}
+            />
+          </div>
+        </div>
+
         <div>{contents}</div>
       </Fragment>
     );

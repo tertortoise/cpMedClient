@@ -4,11 +4,10 @@ import {Grid} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    marginBottom: theme.spacing(1),
+  gridItem: {
+
   },
 }));
-
 
 const ApptsListFilter = props => {
   const classes = useStyles();
@@ -27,14 +26,9 @@ const ApptsListFilter = props => {
     }
   ]
 
-  return (
-    <Grid container spacing={1} className={classes.root}>
-      {array.map(item => {
-        return (<Grid key={item.id} item>{props.renderButtons(item.id, item.rep)}</Grid>) 
+  return array.map(item => {
+        return props.renderButtons(item.id, item.rep)
       })}
-    </Grid>
-  );
-};
 
 ApptsListFilter.propTypes = {
   filterId: PropTypes.string.isRequired,

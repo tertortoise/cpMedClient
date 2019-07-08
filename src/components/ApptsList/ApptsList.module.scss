@@ -1,0 +1,17 @@
+.Container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  .Item {
+    &:not(:last-child) {
+      padding-right: 8px;
+    }
+  }
+  .ML {
+    margin-left: auto;
+  }
+}
+
+.ML {
+  margin-left: auto;
+}
