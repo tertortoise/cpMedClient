@@ -248,7 +248,7 @@ function Layout(props) {
   /** slide down main menu items */
   const mmItems = mainMenu.xl.map((item) => {
     if (mainMenu[currentWidth].includes(item)) return null;
-    else return <MenuItem onClick={handleMMClose}>{item.name}</MenuItem>;
+    else return <MenuItem key={item.eng} onClick={handleMMClose}>{item.name}</MenuItem>;
   });
 
   /** handling drawer */
@@ -446,6 +446,7 @@ function Layout(props) {
             >
               <Button
                 variant='outlined'
+                color='primary'
                 size='small'
                 className={classes.button}
                 onClick={handleMenuClick('/apptEditor')}

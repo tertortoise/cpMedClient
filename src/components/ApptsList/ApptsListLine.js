@@ -17,7 +17,6 @@ class ApptsListLine extends Component {
 
   modalOnOpen = () => {
     this.setState({ modalOpen: true }, () => {
-      console.log(this.closeModalButton);
       this.closeModalButton.focus();
     });
     this.toggleScrollLock();

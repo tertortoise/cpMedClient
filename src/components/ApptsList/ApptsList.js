@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 
 import { fetchScheduleGen, fetchAppts, editAppt } from '../../actions/actions';
 import arraySortByProp from '../../utils/arraySortByProp';
-import styles from './ApptsList.module.scss';
 import Search from '../UI/Search';
 import Filter from './ApptsListFilter';
-import Button from '../UI/Button';
+import SelectableButton from '../UI/SelectableButton';
 import ApptsListLine from './ApptsListLine';
 
 class ApptsList extends Component {
@@ -18,11 +16,10 @@ class ApptsList extends Component {
       empty: true,
     },
     filterId: 'all',
-    filterThresh: moment().format('YYYY-MM-DD'),
+    filterThresh: new Date().toISOString().slice(0, 10),
   };
 
   changeFilterHandler = (e, btnId) => {
-    console.log(btnId);
     if (btnId === this.state.filterId) return;
     this.changeSearchHandler('');
     this.setState((prevState) => {
@@ -62,7 +59,6 @@ class ApptsList extends Component {
   };
 
   deleteApptHandler = (apptId) => {
-
     let apptToDeleteIndex;
     const apptToDelete = this.props.appts.find((item, index) => {
       if (item.apptId === apptId) {
@@ -131,16 +127,25 @@ class ApptsList extends Component {
     }
 
     return (
-      <div className='ApptsList'>
+      <Fragment>
         <Filter
           renderButtons={(btnId, btnName) => (
-            <Button
-              key={btnId}
-              btnName={btnName}
+            // <Button
+            //   key={btnId}
+            //   btnName={btnName}
+            //   selected={btnId === this.state.filterId}
+            //   btnTypes={['Switch']}
+            //   clickHandler={(e) => this.changeFilterHandler(e, btnId)}
+            // />
+            <SelectableButton
+              size="small"
+              variant='outlined'
+              color='primary'
               selected={btnId === this.state.filterId}
-              btnTypes={['Switch']}
-              clickHandler={(e) => this.changeFilterHandler(e, btnId)}
-            />
+              onClick={(e) => this.changeFilterHandler(e, btnId)}
+            >
+              {btnName}
+            </SelectableButton>
           )}
           filterId={this.state.filterId}
         />
@@ -153,7 +158,7 @@ class ApptsList extends Component {
           changeSearchHandler={this.changeSearchHandler}
         />
         <div>{contents}</div>
-      </div>
+      </Fragment>
     );
   }
 }
