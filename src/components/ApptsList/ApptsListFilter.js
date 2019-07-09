@@ -34,4 +34,9 @@ ApptsListFilter.propTypes = {
   filterId: PropTypes.string.isRequired,
 };
 
-export default ApptsListFilter;
+function areEqual(prevProps, nextProps) {
+  if (prevProps.filterId === nextProps.filterId) return true;
+  else return false;
+}
+
+export default React.memo(ApptsListFilter, areEqual);

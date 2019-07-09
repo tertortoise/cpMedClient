@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import { withStyles } from '@material-ui/styles';
 
 import { fetchScheduleGen, fetchAppts, editAppt } from '../../actions/actions';
 import arraySortByProp from '../../utils/arraySortByProp';
@@ -9,7 +10,24 @@ import Search from '../UI/Search';
 import Filter from './ApptsListFilter';
 import SelectableButton from '../UI/SelectableButton';
 import ApptsListLine from './ApptsListLine';
-import styles from './ApptsList.module.scss';
+
+const styleSheet = (theme) => ({
+  Container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    marginBottom: theme.spacing(1),
+    
+  },
+  Item: {
+    paddingBottom: theme.spacing(0.5),
+    '&:not(:last-child)': {
+      paddingRight: theme.spacing(1),
+    },
+  },
+  ML: {
+    marginLeft: 'auto',
+  },
+});
 
 class ApptsList extends Component {
   state = {
@@ -127,28 +145,26 @@ class ApptsList extends Component {
         });
       }
     }
-
     return (
       <Fragment>
-        <div className={styles.Container}>
+        <div className={this.props.classes.Container}>
           <Filter
             renderButtons={(btnId, btnName) => (
-              <div className={styles.Item}>
+              <div key={btnId} className={this.props.classes.Item}>
                 <SelectableButton
-                size='small'
-                variant='outlined'
-                color='primary'
-                selected={btnId === this.state.filterId}
-                onClick={(e) => this.changeFilterHandler(e, btnId)}
-              >
-                {btnName}
-              </SelectableButton>
+                  size='small'
+                  variant='outlined'
+                  color='primary'
+                  selected={btnId === this.state.filterId}
+                  onClick={(e) => this.changeFilterHandler(e, btnId)}
+                >
+                  {btnName}
+                </SelectableButton>
               </div>
-              
             )}
             filterId={this.state.filterId}
           />
-          <div className={clsx(styles.Item, styles.ML)}>
+          <div className={clsx(this.props.classes.Item, this.props.classes.ML)}>
             <Search
               id='search_in_apptsList'
               value={this.state.search.value}
@@ -171,6 +187,8 @@ class ApptsList extends Component {
   }
 }
 
+const StyledApptsList = withStyles(styleSheet)(ApptsList);
+
 ApptsList.propTypes = {
   appts: PropTypes.array.isRequired,
 };
@@ -191,4 +209,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ApptsList);
+)(StyledApptsList);

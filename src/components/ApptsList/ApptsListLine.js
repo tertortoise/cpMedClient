@@ -1,12 +1,18 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import {Delete, Create} from '@material-ui/icons';
 
-import Button from '../UI/Button';
 import Modal from '../UI/Modal';
 import ModalConfirm from '../UI/ModalConfirm';
 import styles from './ApptsListLine.module.scss';
+import { IconButton } from '@material-ui/core';
 
 class ApptsListLine extends Component {
+  constructor(props) {
+    super(props);
+    this.openModalButton = React.createRef();
+  }
+
   state = {
     modalOpen: false,
   };
@@ -24,7 +30,7 @@ class ApptsListLine extends Component {
 
   modalOnClose = (e, type) => {
     this.setState({ modalOpen: false });
-    this.openModalButton && this.openModalButton.focus();
+    this.openModalButton.current && this.openModalButton.current.focus();
     this.toggleScrollLock();
     if (type === 'confirm') {
       this.props.deleteApptHandler(this.props.appt.apptId);
@@ -44,26 +50,27 @@ class ApptsListLine extends Component {
       buttonBlock = (
         <span>
           <span>
-            <Button
-              btnName='Редактировать'
-              selected={false}
-              btnTypes={['Inline']}
-              clickHandler={(e) => this.props.editApptHandler(e, appt.apptId)}
-            />
+            <IconButton
+              color="primary"
+              onClick={(e) => this.props.editApptHandler(e, appt.apptId)}
+            >
+              <Create />
+            </IconButton>
           </span>
           <span>
-            <Button
-              btnName='Отменить'
-              selected={false}
-              btnTypes={['Inline']}
-              clickHandler={(e) => this.modalOnOpen()}
-              buttonRef={(node) => (this.openModalButton = node)}
-            />
+            <IconButton
+              color="primary"
+              onClick={(e) => this.modalOnOpen()}
+              ref={this.openModalButton}
+              // ref={(node) => (this.openModalButton = node)}
+            >
+              <Delete />
+            </IconButton>
           </span>
         </span>
       );
     }
-
+    console.log(this.openModalButton);
     return (
       <Fragment>
         <div className={classNames.join(' ')}>
