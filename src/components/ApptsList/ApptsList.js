@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/styles';
+import {Paper} from '@material-ui/core';
 
 import { fetchScheduleGen, fetchAppts, editAppt } from '../../actions/actions';
 import arraySortByProp from '../../utils/arraySortByProp';
@@ -27,6 +28,9 @@ const styleSheet = (theme) => ({
   ML: {
     marginLeft: 'auto',
   },
+  paper: {
+    paddingLeft: theme.spacing(0.5),
+  }
 });
 
 class ApptsList extends Component {
@@ -181,7 +185,7 @@ class ApptsList extends Component {
           </div>
         </div>
 
-        <div>{contents}</div>
+        <Paper className={this.props.classes.paper}>{contents}</Paper>
       </Fragment>
     );
   }

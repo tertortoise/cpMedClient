@@ -121,11 +121,39 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
     },
   },
+  listItemPersonal: {
+    color: theme.palette.primary.dark,
+    fontStyle: 'italic',
+  },
   listItemRoot: {
+    color: theme.palette.primary.main,
+    '& .MuiSvgIcon-root': {
+      color: theme.palette.primary.main,
+    },
+    '&:hover': {
+      backgroundColor: theme.palette.primary.light,
+      color: theme.palette.primary.dark,
+      '& .MuiSvgIcon-root': {
+        color: theme.palette.primary.dark,
+      },
+    },
     '&.Mui-disabled': {
       opacity: 1,
+    },
+    '&.Mui-selected': {
+      backgroundColor: theme.palette.primary.light,
+      color: theme.palette.primary.dark,
+      '& .MuiSvgIcon-root': {
+        color: theme.palette.primary.dark,
+      },
+      //for mobile drawer to increase specificity
+      '&:hover': {
+        color: theme.palette.primary.dark,
+        backgroundColor: theme.palette.primary.light,
+      },
     }
   },
+  
   content: {
     marginTop: '140px',
     marginLeft: drawerWidth,
@@ -259,22 +287,16 @@ function Layout(props) {
   }
   /** handling selection of sidebar items */
 
-  // const [selectedMenuItem, setSelectedMenuItem] = useState(
-  //   props.location.pathname
-  // );
-  // useEffect(() => {
-  //   setSelectedMenuItem(props.location.pathname);
-  // });
   const handleMenuClick = (path) => (e) => { 
     props.history.push(path);
   };
   const drawer = (
     <List className={classes.list}>
-      <ListItem>
+      <ListItem >
         <ListItemAvatar>
           <Avatar src={props.personalImage} />
         </ListItemAvatar>
-        <ListItemText secondary={`${props.surname} ${props.firstName} ${props.middleName}`} />
+        <ListItemText secondary={`${props.surname} ${props.firstName} ${props.middleName}`} className={classes.listItemPersonal} secondaryTypographyProps={{color: 'inherit'}}/>
       </ListItem>
       <ListItem
         button
@@ -284,7 +306,7 @@ function Layout(props) {
         className={classes.listItemRoot}
       >
         <ListItemIcon>
-          <Home />
+          <Home color="primary" />
         </ListItemIcon>
         <ListItemText primary='Кабинет' />
       </ListItem>

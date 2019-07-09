@@ -5,7 +5,9 @@ import { IconButton } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 
-import DialogAlertMUI from '../UI/DialogAlertMUI';
+import Modal from '../UI/ZZZModal';
+import ModalConfirm from '../UI/ZZZModalConfirm';
+import styles from './ApptsListLine.module.scss';
 
 const styleSheet = (theme) => ({
   LineCont: {
@@ -13,7 +15,7 @@ const styleSheet = (theme) => ({
     flexWrap: 'nowrap',
     '&:not(:last-child)': {
       marginBottom: theme.spacing(1),
-    },
+    }
   },
   TextCont: {
     display: 'flex',
@@ -26,7 +28,7 @@ const styleSheet = (theme) => ({
     },
     '&:first-child': {
       fontWeight: 'bold',
-    },
+    }
   },
   Active: {
     color: theme.palette.primary.main,
@@ -41,8 +43,33 @@ const styleSheet = (theme) => ({
 });
 
 class ApptsListLine extends Component {
-  dialogYesHandler = () => {
-    this.props.deleteApptHandler(this.props.appt.apptId);
+  state = {
+    modalOpen: false,
+  };
+
+  /** modal management */
+  toggleScrollLock = () =>
+    document.querySelector('html').classList.toggle('u-lock-scroll');
+
+  modalOnOpen = () => {
+    this.setState({ modalOpen: true }, () => {
+      this.closeModalButton.focus();
+    });
+    this.toggleScrollLock();
+  };
+
+  modalOnClose = (e, type) => {
+    this.setState({ modalOpen: false });
+    this.openModalButton && this.openModalButton.focus();
+    this.toggleScrollLock();
+    if (type === 'confirm') {
+      this.props.deleteApptHandler(this.props.appt.apptId);
+    }
+  };
+
+  modalOnClickAway = (e) => {
+    if (this.modalNode && this.modalNode.contains(e.target)) return;
+    this.modalOnClose();
   };
 
   render() {
@@ -60,32 +87,14 @@ class ApptsListLine extends Component {
             </IconButton>
           </div>
           <div>
-            <DialogAlertMUI
-              renderBtnOpen={(handleClickOpen) => (
-                <IconButton color='primary' onClick={handleClickOpen}>
-                  <Delete />
-                </IconButton>
-              )}
-              title='Отмена записи'
-              yesHandler={this.dialogYesHandler}
-              btnNoName='Нет'
-              btnYesName='Да, отменить!'
-              btnYesColor="red"
+            <IconButton
+              color='primary'
+              onClick={(e) => this.modalOnOpen()}
+              // ref={this.openModalButton}
+              ref={(node) => (this.openModalButton = node)}
             >
-              <Fragment>
-                <div>Подтвердите отмену записи к врачу.</div>
-                <div>Номер талона: {appt.apptId}</div>
-            <div>
-              Дата: {appt.date
-                .split('-')
-                .reverse()
-                .join('.')}
-            </div>
-            <div>Время: {appt.time}</div>
-            <div>Врач: {appt.speciality.toLowerCase()}</div>
-            <div>{appt.docFullName}</div>
-              </Fragment>
-            </DialogAlertMUI>
+              <Delete />
+            </IconButton>
           </div>
         </div>
       );
@@ -95,12 +104,7 @@ class ApptsListLine extends Component {
         <div className={classes.LineCont}>
           <div className={clsx(classes.TextCont, classes[apptStatus])}>
             <div className={classes.TextItem}>{appt.apptId}</div>
-            <div className={classes.TextItem}>
-              {appt.date
-                .split('-')
-                .reverse()
-                .join('.')}
-            </div>
+            <div className={classes.TextItem}>{appt.date.split('-').reverse().join('.')}</div>
             <div className={classes.TextItem}>{appt.time}</div>
             <div className={classes.TextItem}>{appt.speciality}</div>
             <div className={classes.TextItem}>{appt.docFullName}</div>
@@ -108,7 +112,26 @@ class ApptsListLine extends Component {
 
           {buttonBlock}
         </div>
-        
+        {this.state.modalOpen && (
+          <Modal>
+            <ModalConfirm
+              appt={appt}
+              modalOnClickAway={this.modalOnClickAway}
+              modalOnClose={this.modalOnClose}
+              buttonRef={(node) => (this.closeModalButton = node)}
+              modalRef={(node) => (this.ModalNode = node)}
+            >
+              <div className={styles.ConfirmMessage}>
+                <div>Вы отменяете прием врача:</div>
+                <div>{appt.apptId}</div>
+                <div>{appt.docFullName}</div>
+                <div>{appt.speciality}</div>
+                <div>{appt.dateTime}</div>
+                <div>Подтверждаете?</div>
+              </div>
+            </ModalConfirm>
+          </Modal>
+        )}
       </Fragment>
     );
   }

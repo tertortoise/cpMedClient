@@ -2,7 +2,7 @@ import React from 'react';
 import ReactFocusTrap from 'focus-trap-react';
 import PropTypes from 'prop-types';
 
-import Button from '../UI/Button';
+import Button from './Button';
 import styles from './ModalConfirm.module.scss';
 
 const ModalConfirm = ({
