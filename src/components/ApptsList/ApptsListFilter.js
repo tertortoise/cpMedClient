@@ -1,15 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
-  gridItem: {
-
-  },
-}));
 
 const ApptsListFilter = props => {
-  const classes = useStyles();
   const array = [
     {
       id: 'all',

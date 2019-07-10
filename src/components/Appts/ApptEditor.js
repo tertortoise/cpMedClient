@@ -16,7 +16,6 @@ import Spinner from '../UI/Spinner';
 import arraySortByProp from '../../utils/arraySortByProp';
 import dataSpecialities from '../../data/dataSpecialities';
 import dataDoctors from '../../data/dataDoctors';
-import dataScheduleProc from '../../data/dataScheduleProc';
 
 class ApptEditor extends Component {
   state = {
@@ -370,12 +369,18 @@ class ApptEditor extends Component {
       newApptId = this.state.prevApptId;
     } else {
       //make new appt, add to appts and sort appts
-      while (true) {
+      do {
         newApptId = Math.floor(Math.random() * 1000000)
           .toString()
           .padStart(6, '0');
-        if (!appts.find((item) => item.apptId === newApptId)) break;
-      }
+      } while (appts.find((item) => item.apptId === newApptId));
+
+      // while (true) {
+      //   newApptId = Math.floor(Math.random() * 1000000)
+      //     .toString()
+      //     .padStart(6, '0');
+      //   if (!appts.find((item) => item.apptId === newApptId)) break;
+      // }
       newAppt.apptId = newApptId;
       appts.push(newAppt);
       this.props.fetchAppts(arraySortByProp(appts, 'dateTime', 'desc'));
@@ -453,12 +458,9 @@ class ApptEditor extends Component {
     });
   }
 
-
   componentWillUnmount() {
     this.props.editAppt({ initialStage: 'specialities' });
   }
-  
-
 
   render() {
     if (this.state.loading) {

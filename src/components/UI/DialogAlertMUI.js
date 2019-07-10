@@ -29,7 +29,6 @@ const DialogAlertMUI = (props) => {
     btnYesName,
     btnYesColor,
   } = props;
-  console.log(btnYesColor);
   const [open, setOpen] = React.useState(false);
 
   function handleClickOpen() {

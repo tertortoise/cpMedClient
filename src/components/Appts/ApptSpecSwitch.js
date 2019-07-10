@@ -1,8 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './ApptSpecSwitch.module.scss';
-import Button from '../UI/Button';
+import SelectableButton from '../UI/SelectableButton';
+import { withStyles } from '@material-ui/styles';
+
+const styleSheet = (theme) => ({
+  MB1: {
+    marginBottom: theme.spacing(0.5),
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  BtnItem: {
+    '&:not(:last-child)': {
+      paddingRight: theme.spacing(1),
+    },
+  },
+});
 
 const ApptSpecSwitch = (props) => {
   let selectedSpecialities = false;
@@ -14,19 +27,29 @@ const ApptSpecSwitch = (props) => {
   }
 
   return (
-    <div className={styles.ApptSpecSwitch}>
-      <Button
-        btnName='Выберите врача по специальности'
-        selected={selectedSpecialities}
-        btnTypes={['Switch']}
-        clickHandler={(e) => props.switchHandler(e, 'specialities')}
-      />
-      <Button
-        btnName='Выберите врача по Ф.И.О.'
-        selected={selectedDoctors}
-        btnTypes={['Switch']}
-        clickHandler={(e) => props.switchHandler(e, 'doctors')}
-      />
+    <div className={props.classes.MB1}>
+      <div className={props.classes.BtnItem}>
+        <SelectableButton
+          color='primary'
+          variant='outlined'
+          size='small'
+          onClick={(e) => props.switchHandler(e, 'specialities')}
+          selected={selectedSpecialities}
+        >
+          По специальности
+        </SelectableButton>
+      </div>
+      <div className={props.classes.BtnItem}>
+        <SelectableButton
+          color='primary'
+          variant='outlined'
+          size='small'
+          onClick={(e) => props.switchHandler(e, 'doctors')}
+          selected={selectedDoctors}
+        >
+          По Ф.И.О. врача
+        </SelectableButton>
+      </div>
     </div>
   );
 };
@@ -36,4 +59,4 @@ ApptSpecSwitch.propTypes = {
   alt: PropTypes.string.isRequired,
 };
 
-export default ApptSpecSwitch;
+export default withStyles(styleSheet)(ApptSpecSwitch);
