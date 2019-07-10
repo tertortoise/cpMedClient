@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './ApptSpecialities.module.scss';
+import SelectableSpan from '../UI/SelectableSpan';
 
 const ApptSpecialities = (props) => {
   /** building contents from Map */
@@ -10,26 +11,17 @@ const ApptSpecialities = (props) => {
   Contents.child = [];
   props.specialities.forEach((spec, id) => {
     if (!spec.visible) return;
-    const spanClassName = [styles.Span];
-    if (spec.selected) {
-      spanClassName.push(styles.Selected);
-    }
     Contents[spec.ageCategory].push(
       <div key={id}>
-        <span
-        className={spanClassName.join(' ')}
-        
-        id={id}
-        title={spec.details}
-        onClick={(e) => props.selectHandler(e, id)}
-      >{spec.title}
-       </span>
-       <span>{props.children(spec.selected)}</span>
+        <SelectableSpan
+          selected={spec.selected}
+          title={spec.details}
+          clickHandler={(e) => props.selectHandler(e, id)}
+        >
+          {spec.title}
+        </SelectableSpan>
+        <span>{props.children(spec.selected)}</span>
       </div>
-      
-        
-        
-     
     );
   });
 

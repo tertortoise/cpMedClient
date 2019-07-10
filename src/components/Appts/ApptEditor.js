@@ -2,6 +2,9 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { withStyles } from '@material-ui/styles';
+import { ArrowBack, ArrowForward, Autorenew } from '@material-ui/icons';
+import { IconButton } from '@material-ui/core';
 
 import { fetchScheduleGen, fetchAppts, editAppt } from '../../actions/actions';
 import Button from '../UI/Button';
@@ -16,6 +19,45 @@ import Spinner from '../UI/Spinner';
 import arraySortByProp from '../../utils/arraySortByProp';
 import dataSpecialities from '../../data/dataSpecialities';
 import dataDoctors from '../../data/dataDoctors';
+
+const styleSheet = (theme) => ({
+  MB1: {
+    marginBottom: theme.spacing(0.5),
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  Search: {
+    marginLeft: 'auto',
+  },
+  MB2: {
+    //next and prev buttons - sticky above footer
+    position: 'sticky',
+    bottom: theme.spacing(1),
+    display: 'flex',
+    [theme.breakpoints.up('lg')]: {
+      width: '35%',
+    },
+    [theme.breakpoints.down('lg')]: {
+      width: '40%',
+    },
+    [theme.breakpoints.down('md')]: {
+      width: '60%',
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '80%',
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
+    },
+  },
+  BtnForw: {
+    marginLeft: 'auto',
+  },
+  BtnBack: {
+
+  }
+});
 
 class ApptEditor extends Component {
   state = {
@@ -468,17 +510,32 @@ class ApptEditor extends Component {
     }
     let contents, stagePage, stageSwitch, search, btnBack, btnNext;
     btnNext = (
-      <Button
-        btnTypes={['Next', 'Bold']}
-        btnName={this.state.activeStage.btnNameNext}
-        disabled={!this.state.activeStage.next}
-        clickHandler={(e) =>
-          this.stageChangeHandler(
-            e,
-            this.state.stages[this.state.activeStage.type].next
-          )
-        }
-      />
+      <div className={this.props.classes.BtnForw}>
+        <IconButton
+          color='primary'
+          disabled={!this.state.activeStage.next}
+          onClick={(e) =>
+            this.stageChangeHandler(
+              e,
+              this.state.stages[this.state.activeStage.type].next
+            )
+          }
+        >
+          <ArrowForward />
+        </IconButton>
+      </div>
+
+      // <Button
+      //   btnTypes={['Next', 'Bold']}
+      //   btnName={this.state.activeStage.btnNameNext}
+      //   disabled={!this.state.activeStage.next}
+      //   clickHandler={(e) =>
+      //     this.stageChangeHandler(
+      //       e,
+      //       this.state.stages[this.state.activeStage.type].next
+      //     )
+      //   }
+      // />
     );
     if (
       this.state.activeStage.type === 'specialities' ||
@@ -491,14 +548,19 @@ class ApptEditor extends Component {
         />
       );
       search = (
-        <Search
-          value={this.state.search.value}
-          empty={this.state.search.empty}
-          disabled={this.state.search.disabled}
-          label='Для поиска вводите буквы русского алфавита'
-          placeholder='Поиск'
-          changeSearchHandler={this.changeSearchHandler}
-        />
+        <div className={this.props.classes.Search}>
+          <Search
+            id='search_in_apptEditor'
+            value={this.state.search.value}
+            placeholder='Буквы русского алфавита, пробел'
+            disabled={this.state.search.disabled}
+            helperText={
+              this.state.search.empty ? null : 'Буквы русского алфавита, пробел'
+            }
+            label='Поиск...'
+            changeSearchHandler={this.changeSearchHandler}
+          />
+        </div>
       );
     }
     if (this.state.activeStage.type === 'specialities') {
@@ -556,17 +618,31 @@ class ApptEditor extends Component {
       this.state.activeStage.type === 'confirm'
     ) {
       btnBack = (
-        <Button
-          btnTypes={['Next', 'Bold']}
-          btnName='Назад'
-          disabled={!this.state.activeStage.prev}
-          clickHandler={(e) =>
-            this.stageChangeHandler(
-              e,
-              this.state.stages[this.state.activeStage.type].prev
-            )
-          }
-        />
+        <div className={this.props.classes.BtnBack}>
+          <IconButton
+            color='primary'
+            disabled={!this.state.activeStage.prev}
+            onClick={(e) =>
+              this.stageChangeHandler(
+                e,
+                this.state.stages[this.state.activeStage.type].prev
+              )
+            }
+          >
+            <ArrowBack />
+          </IconButton>
+        </div>
+        // <Button
+        //   btnTypes={['Next', 'Bold']}
+        //   btnName='Назад'
+        //   disabled={!this.state.activeStage.prev}
+        //   clickHandler={(e) =>
+        //     this.stageChangeHandler(
+        //       e,
+        //       this.state.stages[this.state.activeStage.type].prev
+        //     )
+        //   }
+        // />
       );
     }
     if (this.state.activeStage.type === 'schedule') {
@@ -628,22 +704,29 @@ class ApptEditor extends Component {
     }
 
     stagePage = (
-      <React.Fragment>
-        {stageSwitch}
-        {search}
+      <Fragment>
+        <div className={this.props.classes.MB1}>
+          {stageSwitch}
+          {search}
+        </div>
         {contents}
-      </React.Fragment>
+      </Fragment>
     );
 
     return (
       <Fragment>
-        <ApptProgress
-          stageChangeHandler={this.stageChangeHandler}
-          activeStage={this.state.activeStage}
-        />
-        {btnBack}
-        {btnNext}
+        <div className={this.props.classes.MB1}>
+          <ApptProgress
+            stageChangeHandler={this.stageChangeHandler}
+            activeStage={this.state.activeStage}
+          />
+        </div>
+
         {stagePage}
+        <div className={this.props.classes.MB2}>
+          {btnBack}
+          {btnNext}
+        </div>
       </Fragment>
     );
   }
@@ -679,4 +762,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ApptEditor);
+)(withStyles(styleSheet)(ApptEditor));

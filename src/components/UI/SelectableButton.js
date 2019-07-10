@@ -9,8 +9,7 @@ const useStyles = makeStyles((theme) => ({
 
     color: (props) =>
       props.selected ? theme.palette.primary.dark : theme.palette.primary.main,
-    fontWeight: (props) =>
-    props.selected ? 700 : 400,
+    fontWeight: (props) => (props.selected ? 700 : 400),
     '&:hover': {
       backgroundColor: theme.palette.primary.light,
       color: theme.palette.primary.dark,

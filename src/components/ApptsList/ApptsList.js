@@ -29,7 +29,7 @@ const styleSheet = (theme) => ({
     marginLeft: 'auto',
   },
   paper: {
-    paddingLeft: theme.spacing(0.5),
+    paddingLeft: theme.spacing(1),
   }
 });
 

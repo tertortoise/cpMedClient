@@ -1,15 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 
 import SelectableButton from '../UI/SelectableButton';
 
 const styleSheet = (theme) => ({
-  MB1: {
-    marginBottom: theme.spacing(0.5),
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
   BtnItem: {
     '&:not(:last-child)': {
       paddingRight: theme.spacing(1),
@@ -51,7 +46,7 @@ const ApptProgress = ({
     }
   }
   return (
-    <div className={classes.MB1}>
+    <Fragment>
       <div className={classes.BtnItem}>
         <SelectableButton
           color='primary'
@@ -85,7 +80,7 @@ const ApptProgress = ({
           {btn3Name}
         </SelectableButton>
       </div>
-    </div>
+    </Fragment>
   );
 };
 
