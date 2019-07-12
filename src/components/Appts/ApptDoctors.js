@@ -1,28 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import docImage from '../../images/docMale.jpg';
 import styles from './ApptDoctors.module.scss';
+import SelectableSpan from '../UI/SelectableSpan';
 
 const ApptDoctors = (props) => {
   let contents = [];
 
   props.doctors.forEach((item, id) => {
     if (!item.visible) return;
-    const itemClassName = [styles.ItemLine];
-    if (item.selected) {
-      itemClassName.push(styles.Selected);
-    }
+
     contents.push(
-      <div key={id}>
-        <span
-          title={item.details}
-          className={itemClassName.join(' ')}
-          onClick={(e) => props.selectHandler(e, id)}
-        >
-          <span>Foto</span>
-          <span>{item.fullName}</span>
-          <span>{props.specialities.get(item.speciality).title}</span>
-        </span>
-        <span>{props.children(item.selected)}</span>
+      <div className={styles.Paper} key={id}>
+        <div className={styles.FotoCont}>
+          <img width={100} src={docImage} />
+        </div>
+        <div className={styles.DetailsCont}>
+          <div className={styles.FullName}>
+            <SelectableSpan
+              classNames={styles.FullName}
+              selected={item.selected}
+              clickHandler={(e) => props.selectHandler(e, id)}
+            >
+              {item.fullName}
+            </SelectableSpan>
+            <span>{props.children(item.selected)}</span>
+          </div>
+
+          <div className={styles.Speciality}>
+            {props.specialities.get(item.speciality).title}
+          </div>
+          <div className={styles.Price}>
+            Стоимость приема 2000 руб.
+          </div>
+        </div>
       </div>
     );
   });

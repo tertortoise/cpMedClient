@@ -1,10 +1,28 @@
-.ApptDoctors {
-  .ItemLine {
-    span {
-      padding-left: 0.3rem;
-    }
+@import '../../styles/theme.scss';
+
+.Paper {
+  @include paper;
+  margin-bottom: $spacing;
+  padding: $spacing * 1.5;
+  display: flex;
+  align-items: center;
+  .FotoCont > img {
+    border-radius: 50%;
   }
-  .Selected {
-    background-color: orange;
+  .DetailsCont {
+    padding-left: $spacing*2;
+    .FullName, .Speciality {
+      margin-bottom: $spacing;
+    }
+    .Speciality {
+      padding-left: $spacing/2;
+      font-size: 1.3rem;
+      font-style: italic;
+    }
+    .Price {
+      padding-left: $spacing/2;
+      font-size: 1.1rem;
+    }
+    
   }
 }

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { withStyles } from '@material-ui/styles';
-import { ArrowBack, ArrowForward, Autorenew } from '@material-ui/icons';
-import { IconButton } from '@material-ui/core';
+import { ArrowBack, ArrowForward } from '@material-ui/icons';
+import { Button as ButtonMUI, IconButton } from '@material-ui/core';
 
 import { fetchScheduleGen, fetchAppts, editAppt } from '../../actions/actions';
 import Button from '../UI/Button';
@@ -35,28 +35,16 @@ const styleSheet = (theme) => ({
     position: 'sticky',
     bottom: theme.spacing(1),
     display: 'flex',
-    [theme.breakpoints.up('lg')]: {
-      width: '35%',
-    },
-    [theme.breakpoints.down('lg')]: {
-      width: '40%',
-    },
-    [theme.breakpoints.down('md')]: {
-      width: '60%',
-    },
-    [theme.breakpoints.down('sm')]: {
-      width: '80%',
-    },
-    [theme.breakpoints.down('xs')]: {
-      width: '100%',
-    },
+    margin: '0 auto',
+    width: '80%',
+    color: '#f42ab5',
   },
   BtnForw: {
     marginLeft: 'auto',
   },
   BtnBack: {
-
-  }
+    
+  },
 });
 
 class ApptEditor extends Component {
@@ -512,7 +500,7 @@ class ApptEditor extends Component {
     btnNext = (
       <div className={this.props.classes.BtnForw}>
         <IconButton
-          color='primary'
+          color="secondary"
           disabled={!this.state.activeStage.next}
           onClick={(e) =>
             this.stageChangeHandler(
@@ -524,18 +512,6 @@ class ApptEditor extends Component {
           <ArrowForward />
         </IconButton>
       </div>
-
-      // <Button
-      //   btnTypes={['Next', 'Bold']}
-      //   btnName={this.state.activeStage.btnNameNext}
-      //   disabled={!this.state.activeStage.next}
-      //   clickHandler={(e) =>
-      //     this.stageChangeHandler(
-      //       e,
-      //       this.state.stages[this.state.activeStage.type].next
-      //     )
-      //   }
-      // />
     );
     if (
       this.state.activeStage.type === 'specialities' ||
@@ -572,17 +548,19 @@ class ApptEditor extends Component {
           {(buttonVisible) => {
             if (!buttonVisible) return null;
             return (
-              <Button
-                btnTypes={['Next', 'Bold']}
-                btnName='Перейти к расписанию'
-                disabled={!this.state.activeStage.next}
-                clickHandler={(e) =>
+              <ButtonMUI
+              color="secondary"
+              size="small"
+                onClick={(e) =>
                   this.stageChangeHandler(
                     e,
                     this.state.stages[this.state.activeStage.type].next
                   )
                 }
-              />
+              >
+                Далее
+              </ButtonMUI>
+
             );
           }}
         </ApptSpecialities>
@@ -597,17 +575,18 @@ class ApptEditor extends Component {
           {(buttonVisible) => {
             if (!buttonVisible) return null;
             return (
-              <Button
-                btnTypes={['Next', 'Bold']}
-                btnName='Перейти к расписанию'
-                disabled={!this.state.activeStage.next}
-                clickHandler={(e) =>
+              <ButtonMUI
+              color="secondary"
+              size="small"
+                onClick={(e) =>
                   this.stageChangeHandler(
                     e,
                     this.state.stages[this.state.activeStage.type].next
                   )
                 }
-              />
+              >
+                Далее
+              </ButtonMUI>
             );
           }}
         </ApptDoctors>
@@ -620,7 +599,7 @@ class ApptEditor extends Component {
       btnBack = (
         <div className={this.props.classes.BtnBack}>
           <IconButton
-            color='primary'
+            color="secondary"
             disabled={!this.state.activeStage.prev}
             onClick={(e) =>
               this.stageChangeHandler(
@@ -632,17 +611,6 @@ class ApptEditor extends Component {
             <ArrowBack />
           </IconButton>
         </div>
-        // <Button
-        //   btnTypes={['Next', 'Bold']}
-        //   btnName='Назад'
-        //   disabled={!this.state.activeStage.prev}
-        //   clickHandler={(e) =>
-        //     this.stageChangeHandler(
-        //       e,
-        //       this.state.stages[this.state.activeStage.type].prev
-        //     )
-        //   }
-        // />
       );
     }
     if (this.state.activeStage.type === 'schedule') {

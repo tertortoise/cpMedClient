@@ -1,32 +1,27 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import styles from './ApptSchDoc.module.scss';
+import SelectableSpan from '../UI/SelectableSpan';
 
 const ApptSchDate = (props) => {
-  
   return (
     <div className={styles.DateLine}>
       <div className={styles.Date}>{props.date}</div>
       <div className={styles.Time}>
         {props.timeSlots.map((timeSlot) => {
-          const timeSlotClassName = [styles.TimeSlot];
-          if (timeSlot.selected) timeSlotClassName.push(styles.Selected);
           return (
-            <span
-              className={timeSlotClassName.join(' ')}
+            <SelectableSpan
+              selected={timeSlot.selected}
               key={timeSlot.docDateTime}
-              onClick={(e) => props.selectHandler(e, timeSlot.docDateTime)}
+              clickHandler={(e) => props.selectHandler(e, timeSlot.docDateTime)}
             >
               {timeSlot.time}
-            </span>
+            </SelectableSpan>
           );
         })}
       </div>
     </div>
   );
 };
-
-ApptSchDate.propTypes = {};
 
 export default ApptSchDate;

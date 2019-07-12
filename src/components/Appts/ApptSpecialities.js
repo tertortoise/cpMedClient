@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import { Paper } from '@material-ui/core';
 
 import styles from './ApptSpecialities.module.scss';
 import SelectableSpan from '../UI/SelectableSpan';
+
 
 const ApptSpecialities = (props) => {
   /** building contents from Map */
@@ -12,30 +15,31 @@ const ApptSpecialities = (props) => {
   props.specialities.forEach((spec, id) => {
     if (!spec.visible) return;
     Contents[spec.ageCategory].push(
-      <div key={id}>
+      <div className={styles.Item} key={id}>
         <SelectableSpan
+          classNames={styles.Span}
           selected={spec.selected}
           title={spec.details}
           clickHandler={(e) => props.selectHandler(e, id)}
         >
           {spec.title}
         </SelectableSpan>
-        <span>{props.children(spec.selected)}</span>
+        <span className={styles.BtnSpan}>{props.children(spec.selected)}</span>
       </div>
     );
   });
 
   return (
-    <div className={styles.ApptSpecialities}>
+    <Fragment>
       <div className={styles.Department}>
-        <h2>Специальности взрослого отделения</h2>
+        <h2 className={styles.Header}>Специальности взрослого отделения</h2>
         <div className={styles.Contents}>{Contents.adult}</div>
       </div>
       <div className={styles.Department}>
-        <h2>Специальности детского отделения</h2>
+        <h2 className={styles.Header}>Специальности детского отделения</h2>
         <div className={styles.Contents}>{Contents.child}</div>
       </div>
-    </div>
+    </Fragment>
   );
 };
 

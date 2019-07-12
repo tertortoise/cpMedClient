@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Button from '../UI/Button';
 
 import styles from './ApptSchDoc.module.scss';
@@ -22,7 +21,5 @@ const ApptSchDoc = (props) => {
     </div>
   );
 };
-
-ApptSchDoc.propTypes = {};
 
 export default ApptSchDoc;

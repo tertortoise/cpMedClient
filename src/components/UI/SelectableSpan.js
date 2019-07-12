@@ -4,10 +4,9 @@ import clsx from 'clsx';
 
 import styles from './SelectableSpan.module.scss';
 
-const SelectableSpan = ({selected, title, clickHandler, children}) => {
-
+const SelectableSpan = ({classNames, selected, title, clickHandler, children}) => {
   return (
-    <span className={clsx(styles.Span, selected && styles.Selected)} onClick={clickHandler} title={title}>
+    <span className={clsx(styles.Span, selected && styles.Selected, classNames)} onClick={clickHandler} title={title}>
       {children}
     </span>
   );
@@ -17,7 +16,8 @@ SelectableSpan.propTypes = {
   selected: PropTypes.bool.isRequired,
   title: PropTypes.string,
   clickHandler: PropTypes.func.isRequired,
-  children: PropTypes.string.isRequired
+  children: PropTypes.string.isRequired,
+  classNames: PropTypes.string,
 };
 
 const areEqual = (prevProps, nextProps) => {

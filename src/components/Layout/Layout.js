@@ -103,9 +103,12 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    color: theme.palette.grey[400],
   },
   activeLink: {
-    backgroundColor: 'red',
+    backgroundColor: theme.palette.secondary.light,
+    color: 'black',
+    borderRadius: '3px',
   },
   moreIconCont: {
     paddingRight: 0,
