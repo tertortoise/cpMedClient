@@ -1,22 +1,39 @@
 import React from 'react';
-import Button from '../UI/Button';
+import { Button as ButtonMUI } from '@material-ui/core';
 
-import styles from './ApptSchDoc.module.scss';
+import styles from './ApptDoctors.module.scss';
+import docMaleImage from '../../images/docMale.jpg';
+import docFemaleImage from '../../images/docFemale.jpg';
 
 const ApptSchDoc = (props) => {
+  const imgSrc = props.doctor.gender === 'male' ? docMaleImage : docFemaleImage;
   return (
-    <div className={styles.DoctorContainer}>
-      <div className={styles.Doctor}>
-        {props.doctor.fullName} is {props.docSpeciality.title}
+    <div className={styles.Paper}>
+      <div className={styles.FotoCont}>
+        <img width={100} src={imgSrc} />
       </div>
-      <div className={styles.DatesContainer}>{props.children()}</div>
-      <div>
-        <Button
-          btnTypes={['Next', 'Bold']}
-          btnName={props.btnName}
-          disabled={props.btnDisabled}
-          clickHandler={props.stageChangeHandler}
-        />
+      <div className={styles.DetailsCont}>
+        <div className={styles.FullName}>{props.doctor.fullName}</div>
+
+        <div className={styles.Speciality}>{props.docSpeciality.title}</div>
+        <div className={styles.Experience}>
+          (стаж {props.doctor.experience})
+        </div>
+        <div className={styles.Price}>Стоимость приема 2000 руб.</div>
+      </div>
+
+      <div className={styles.SchCont}>
+        <div className={styles.DatesCont}>{props.children()}</div>
+        <div className={styles.BtnDiv}>
+          <ButtonMUI
+            color='secondary'
+            size='medium'
+            disabled={props.btnDisabled}
+            onClick={props.stageChangeHandler}
+          >
+            Подтвердить запись
+          </ButtonMUI>
+        </div>
       </div>
     </div>
   );

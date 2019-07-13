@@ -5,7 +5,7 @@ const doctors = [
     middleName: 'Петровна',
     surname: 'Иванова',
     speciality: 's001',
-    ranking: 'kmn',
+    gender: 'female',
     experience: '15 лет',
     priceCoeff: 1.3,
     picture: '', //dynamic 'images/'+ '001' + 'small' or 'big' + 'jpg'
@@ -18,7 +18,7 @@ const doctors = [
     middleName: 'Ивановна',
     surname: 'Кабанова',
     speciality: 's001',
-    ranking: 'specialist',
+    gender: 'female',
     experience: '7 лет',
     priceCoeff: 1,
     picture: '', //dynamic 'images/'+ '001' + 'small' or 'big' + 'jpg'
@@ -31,7 +31,7 @@ const doctors = [
     middleName: 'Николаевич',
     surname: 'Мясников',
     speciality: 's002',
-    ranking: 'specialist',
+    gender: 'male',
     experience: '8 лет',
     priceCoeff: 1.2,
     picture: '', //dynamic 'images/'+ '001' + 'small' or 'big' + 'jpg'
@@ -44,7 +44,7 @@ const doctors = [
     middleName: 'Галигбекович',
     surname: 'Таджикистанов',
     speciality: 's003',
-    ranking: 'specialist',
+    gender: 'male',
     experience: '10 лет',
     priceCoeff: 1,
     picture: '', //dynamic 'images/'+ '001' + 'small' or 'big' + 'jpg'
@@ -57,7 +57,7 @@ const doctors = [
     middleName: 'Эдуардовна',
     surname: 'Хрустикова',
     speciality: 's004',
-    ranking: 'kmn',
+    gender: 'female',
     experience: '12 лет',
     priceCoeff: 1,
     picture: '', //dynamic 'images/'+ '001' + 'small' or 'big' + 'jpg'
@@ -70,7 +70,7 @@ const doctors = [
     middleName: 'Григорьевич',
     surname: 'Александров',
     speciality: 's005',
-    ranking: 'specialist',
+    gender: 'male',
     experience: '11 лет',
     priceCoeff: 1,
     picture: '', //dynamic 'images/'+ '001' + 'small' or 'big' + 'jpg'

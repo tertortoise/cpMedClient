@@ -109,6 +109,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.light,
     color: 'black',
     borderRadius: '3px',
+    padding: '4px',
   },
   moreIconCont: {
     paddingRight: 0,

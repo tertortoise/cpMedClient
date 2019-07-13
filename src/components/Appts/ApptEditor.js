@@ -233,6 +233,7 @@ class ApptEditor extends Component {
   }
 
   stageChangeHandler = (e, nextStage) => {
+    e.stopPropagation();
     let newMap;
     let prevApptId = this.state.prevApptId;
     let schedule = undefined;

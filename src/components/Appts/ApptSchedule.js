@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 
 import ApptSchDoc from './ApptSchDoc';
@@ -66,7 +66,7 @@ const ApptSchedule = ({
     );
   });
 
-  return <div>{page}</div>;
+  return <Fragment>{page}</Fragment>;
 };
 
 ApptSchedule.propTypes = {

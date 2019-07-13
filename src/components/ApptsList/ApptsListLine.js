@@ -10,6 +10,7 @@ import DialogAlertMUI from '../UI/DialogAlertMUI';
 const styleSheet = (theme) => ({
   LineCont: {
     display: 'flex',
+    fontSize: '1.2rem',
     flexWrap: 'nowrap',
     '&:not(:last-child)': {
       marginBottom: theme.spacing(1),

@@ -1,20 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import docImage from '../../images/docMale.jpg';
+import docMaleImage from '../../images/docMale.jpg';
+import docFemaleImage from '../../images/docFemale.jpg';
 import styles from './ApptDoctors.module.scss';
 import SelectableSpan from '../UI/SelectableSpan';
+
 
 const ApptDoctors = (props) => {
   let contents = [];
 
   props.doctors.forEach((item, id) => {
     if (!item.visible) return;
-
+    const imgSrc = item.gender === 'male' ? docMaleImage : docFemaleImage;
     contents.push(
-      <div className={styles.Paper} key={id}>
+      <div className={styles.Paper} key={id} onClick={(e) => props.selectHandler(e, id)}>
         <div className={styles.FotoCont}>
-          <img width={100} src={docImage} />
+          <img width={100} src={imgSrc} />
         </div>
         <div className={styles.DetailsCont}>
           <div className={styles.FullName}>
@@ -31,6 +33,7 @@ const ApptDoctors = (props) => {
           <div className={styles.Speciality}>
             {props.specialities.get(item.speciality).title}
           </div>
+          <div className={styles.Experience}>(стаж {item.experience})</div>
           <div className={styles.Price}>
             Стоимость приема 2000 руб.
           </div>

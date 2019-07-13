@@ -1,12 +1,15 @@
 import React from 'react';
 
-import styles from './ApptSchDoc.module.scss';
+import styles from './ApptDoctors.module.scss';
 import SelectableSpan from '../UI/SelectableSpan';
 
 const ApptSchDate = (props) => {
   return (
     <div className={styles.DateLine}>
-      <div className={styles.Date}>{props.date}</div>
+      <div className={styles.Date}>{props.date
+                .split('-')
+                .reverse()
+                .join('.')}</div>
       <div className={styles.Time}>
         {props.timeSlots.map((timeSlot) => {
           return (
