@@ -61,11 +61,20 @@ const ApptConfirm = ({
       <div className={clsx(styles.GridItem, styles.FullName)}>
         {docFullName}
       </div>
-      <div className={clsx(styles.GridItem, styles.DateTime)}>Дата: {date}</div>
       <div className={clsx(styles.GridItem, styles.DateTime)}>
-        Время: {time}
+        <span className={styles.Attr}>Дата:</span>
+        <span>{date}</span>
+        
       </div>
-      <div className={clsx(styles.GridItem, styles.BtnDiv)}>{children(btnName)}</div>
+      <div className={clsx(styles.GridItem, styles.DateTime)}>
+        <span className={styles.Attr}>Время:</span><span>{time}</span> 
+      </div>
+      <div className={clsx(styles.GridItem, styles.Price)}>
+      <span className={styles.Attr}>Стоимость:</span><span>2000 руб.</span>
+      </div>
+      <div className={clsx(styles.GridItem, styles.BtnDiv)}>
+        {children(btnName)}
+      </div>
     </div>
   );
 };

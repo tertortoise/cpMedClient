@@ -668,17 +668,7 @@ class ApptEditor extends Component {
             >
               {btnName}
             </ButtonMUI>
-              // <Button
-              //   btnTypes={['Next', 'Bold']}
-              //   btnName={btnName}
-              //   disabled={!this.state.activeStage.next}
-              //   clickHandler={(e) =>
-              //     this.stageChangeHandler(
-              //       e,
-              //       this.state.stages[this.state.activeStage.type].next
-              //     )
-              //   }
-              // />
+             
             );
           }}
         </ApptConfirm>

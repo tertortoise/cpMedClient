@@ -126,7 +126,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   listItemPersonal: {
-    color: theme.palette.primary.dark,
+    color: theme.palette.secondary.main,
     fontStyle: 'italic',
   },
   listItemRoot: {
@@ -350,9 +350,7 @@ function Layout(props) {
         </ListItemIcon>
         <ListItemText primary='Личные данные' />
       </ListItem>
-      {/* <MenuLink to='/' primary="Кабинет" icon={} onClick={handleMenuClick('cabinet')} />
-      <MenuLink to='/apptEditor' primary="Записаться на прием" icon={<Create />}  />
-      <MenuLink to='/apptsList' primary="Мои записи" icon={<Ballot />}  /> */}
+     
     </List>
   );
   return (
@@ -472,7 +470,7 @@ function Layout(props) {
             >
               <Button
                 variant='outlined'
-                color='primary'
+                color='secondary'
                 size='small'
                 className={classes.button}
                 onClick={handleMenuClick('/apptEditor')}

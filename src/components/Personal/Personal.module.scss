@@ -1,22 +1,56 @@
+@import '../../styles/theme.scss';
+
 .Personal {
+  .BreadCrumbs {
+    margin-bottom: $spacing;
+  }
   .Contents {
+    display: grid;
+    grid-template-columns: 20% minmax(min-content, max-content);
+    grid-column-gap: $spacing;
     .Foto {
       .FotoPicture {
+        text-align: center;
+        .Picture {
+          border-radius: 50%;
+        }
+        
       }
       .FotoButtons {
-        position: relative;
-        input[type='file'] {
-          opacity: 0;
-          position: absolute;
-          width: 1px;
-          height: 1px;
-          pointer-events: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: $spacing/2;
+        .BtnUploadCont {
+          display: flex;
+          flex-direction: column;
+          .BtnUpload {
+            text-align: center;
+            position: relative;
+            input[type='file'] {
+              opacity: 0;
+              position: absolute;
+              width: 1px;
+              height: 1px;
+              pointer-events: none;
+            }
+          }
+          .BtnUploadComment {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #777;
+          }
+          .BtnUploadError {
+            color: red;
+          }
+        }
+        .BtnDelete {
+          text-align: center;
         }
       }
     }
     .Form {
+      @include paper;
       .FormContents {
-        
       }
     }
   }

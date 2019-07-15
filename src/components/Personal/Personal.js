@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import clsx from 'clsx';
 
 import styles from './Personal.module.scss';
 import { fetchPersonalImage } from '../../actions/actions';
@@ -17,6 +18,7 @@ class Personal extends Component {
       currStage: 'main',
       blankImage: false,
       fotoMsg: 'Фотографии jpeg или png, максимальный размер 2 МБ',
+      fotoMsgError: false,
       elements: {
         fotoBtns: { main: true, editData: false, editPwr: false },
         btnsEdit: { main: true, editData: false, editPwr: false }, //edit psw and edit data block
@@ -46,15 +48,18 @@ class Personal extends Component {
         this.setState({
           blankImage: false,
           fotoMsg: 'Фотографии jpeg или png, максимальный размер 2 МБ',
+          fotoMsgError: false,
         });
       } else if (!(file.type === 'image/png' || file.type === 'image/jpeg')) {
         this.setState({
           fotoMsg:
             'Не удалось загрузить: выберете файл с расширением jp(e)g или png.',
+            fotoMsgError: true,
         });
       } else if (file.size > 1048576 * 2) {
         this.setState({
           fotoMsg: 'Не удалось загрузить: выбран слишком большой файл.',
+          fotoMsgError: true,
         });
       }
     }
@@ -64,7 +69,7 @@ class Personal extends Component {
     this.props.fetchPersonalImage(blankImage);
     this.setState({
       blankImage: true,
-      fotoMsg: 'Фотографии jpeg или png, максимальный размер 2 МБ',
+      fotoMsg: 'Фотографии jpeg или png, max 2 МБ',
     });
   };
 
@@ -81,32 +86,47 @@ class Personal extends Component {
 
     const fotoBtns = elements.fotoBtns[currStage] ? (
       <div className={styles.FotoButtons}>
-        <input
-          type='file'
-          ref={this.inputFoto}
-          onChange={this.fotoUploadHandler}
-        />
-        <Button
-          clickHandler={(e) => this.inputFoto.current.click()}
-          btnTypes={['Next']}
-          btnName='Загрузить фото'
-        />
-        <span>{this.state.fotoMsg}</span>
-        <Button
-          clickHandler={this.fotoDelete}
-          btnTypes={['Next']}
-          btnName='Удалить фото'
-          disabled={this.state.blankImage}
-        />
+        <div className={styles.BtnUploadCont}>
+          <div className={styles.BtnUpload}>
+            <input
+            type='file'
+            ref={this.inputFoto}
+            onChange={this.fotoUploadHandler}
+          />
+          
+          <Button
+            clickHandler={(e) => this.inputFoto.current.click()}
+            btnTypes={['Next']}
+            btnName='Загрузить фото'
+          />
+          </div>
+          
+          <div className={clsx(styles.BtnUploadComment, this.state.fotoMsgError && styles.BtnUploadError)}>{this.state.fotoMsg}</div>
+        </div>
+        <div className={styles.BtnDelete}>
+          <Button
+            clickHandler={this.fotoDelete}
+            btnTypes={['Next']}
+            btnName='Удалить фото'
+            disabled={this.state.blankImage}
+          />
+        </div>
       </div>
     ) : null;
     /** edit personal data form */
     const personalData = elements.personalData[currStage] ? (
-      <PersonalData renderButtons={!elements.btnsEdit[currStage]} dataInputsReadOnly={elements.dataInputsReadOnly[currStage]} changeStage={this.changeStage}/>
+      <PersonalData
+        renderButtons={!elements.btnsEdit[currStage]}
+        dataInputsReadOnly={elements.dataInputsReadOnly[currStage]}
+        changeStage={this.changeStage}
+      />
     ) : null;
 
     const personalPwr = elements.personalPwr[currStage] ? (
-      <PersonalPwr renderButtons={!elements.btnsEdit[currStage]} changeStage={this.changeStage} />
+      <PersonalPwr
+        renderButtons={!elements.btnsEdit[currStage]}
+        changeStage={this.changeStage}
+      />
     ) : null;
 
     /** buttons Edit Pwr and Edit Data */
@@ -134,7 +154,7 @@ class Personal extends Component {
         <div className={styles.Contents}>
           <div className={styles.Foto}>
             <div className={styles.FotoPicture}>
-              <img width={150} src={this.props.personalImage} />
+              <img className={styles.Picture} width={150} src={this.props.personalImage} />
             </div>
             {fotoBtns}
           </div>

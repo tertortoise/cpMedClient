@@ -54,7 +54,7 @@ class ApptsListLine extends Component {
         <div className={classes.ButtsCont}>
           <div>
             <IconButton
-              color='primary'
+              color='secondary'
               onClick={(e) => this.props.editApptHandler(e, appt.apptId)}
             >
               <Create />
@@ -63,7 +63,7 @@ class ApptsListLine extends Component {
           <div>
             <DialogAlertMUI
               renderBtnOpen={(handleClickOpen) => (
-                <IconButton color='primary' onClick={handleClickOpen}>
+                <IconButton color='secondary' onClick={handleClickOpen}>
                   <Delete />
                 </IconButton>
               )}
