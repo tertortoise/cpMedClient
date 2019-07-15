@@ -62,7 +62,7 @@ value: {
   middleName: 'string',
   priceCoeff: 'number', // pricing info
   picture: 'string', //url
-  ranking: 'string', // ranking for title additive, e.g. professor
+  gender: 'string', // male or female for images
   searchString: 'string', //fullname to lowercase
   selected: 'bool',
   speciality: 'string', //id of speciality

@@ -26,12 +26,13 @@ const ApptSchDoc = (props) => {
         <div className={styles.DatesCont}>{props.children()}</div>
         <div className={styles.BtnDiv}>
           <ButtonMUI
+            disableRipple
             color='secondary'
             size='medium'
             disabled={props.btnDisabled}
-            onClick={props.stageChangeHandler}
+            onClick={(e) => props.stageChangeHandler(e, 'confirm')}
           >
-            Подтвердить запись
+            Перейти к подтверждению
           </ButtonMUI>
         </div>
       </div>

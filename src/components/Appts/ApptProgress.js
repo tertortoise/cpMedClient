@@ -30,7 +30,7 @@ const ApptProgress = ({
     btn1Disabled = true;
     btn2Disabled = !next;
   }
-  if (type === 'schedule' || type === 'confirm') {
+  if (type === 'schedule' || type === 'confirm' || type === 'confirmed') {
     btn1Selected = false;
     btn1Name = '1. ВЕРНУТЬСЯ К ВЫБОРУ ВРАЧА';
     if (type === 'schedule') {
@@ -38,11 +38,17 @@ const ApptProgress = ({
       btn3Disabled = !next;
       btn2Selected = true;
     }
-    if (type === 'confirm' || type === 'confirmed') {
-      btn2Disabled = !prev;
-
+    if (type === 'confirm') {
+      btn2Disabled = false;
+      btn1Selected = false;
       btn3Selected = true;
       btn2Name = '2. ВЕРНУТЬСЯ К ВЫБОРУ ДАТЫ И ВРЕМЕНИ';
+    }
+    if (type === 'confirmed') {
+      btn1Name = '1. ВЫБЕРИТЕ ВРАЧА';
+      btn1Selected = false;
+      btn3Selected = true;
+      btn3Name = '3. ЗАПИСЬ ПОДТВЕРЖДЕНА';
     }
   }
   return (

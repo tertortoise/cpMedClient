@@ -1,0 +1,28 @@
+@import '../../styles/theme.scss';
+$colum-breakpoint: 850px;
+
+.Paper {
+  @include paper;
+  margin-bottom: $spacing;
+  padding: $spacing * 1.5;
+  display: grid;
+  grid-template-columns: 1fr 30% 1fr;
+  font-size: 1.2rem;
+  @media (max-width: $colum-breakpoint) {
+    display: flex;
+    flex-direction: column;
+  }
+  .GridItem {
+    grid-column-start: 2;
+  }
+  .Confirm {
+    font-size: 1rem;
+    font-style: italic;
+    color: #888;
+  }
+  .Header {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: $spacing/2 0;
+  }
+}

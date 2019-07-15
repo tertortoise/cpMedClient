@@ -13,7 +13,7 @@ $colum-breakpoint: 850px;
     display: flex;
     flex-direction: column;
   }
-
+  
   .FotoCont {
     text-align: center;
     & > img {
@@ -74,5 +74,10 @@ $colum-breakpoint: 850px;
     .BtnDiv {
       text-align: center;
     }
+  }
+}
+.PaperHover {
+  &:hover {
+    cursor: pointer;
   }
 }

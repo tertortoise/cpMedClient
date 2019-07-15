@@ -327,7 +327,6 @@ class ApptEditor extends Component {
       }
       schedule = this.makeSchedule(doctorId);
     }
-
     this.setState({
       activeStage,
       specialityId,
@@ -655,17 +654,31 @@ class ApptEditor extends Component {
         >
           {(btnName) => {
             return (
-              <Button
-                btnTypes={['Next', 'Bold']}
-                btnName={btnName}
-                disabled={!this.state.activeStage.next}
-                clickHandler={(e) =>
-                  this.stageChangeHandler(
-                    e,
-                    this.state.stages[this.state.activeStage.type].next
-                  )
-                }
-              />
+              <ButtonMUI
+              disableRipple
+              color='secondary'
+              size='medium'
+              disabled={!this.state.activeStage.next}
+              onClick={(e) =>
+                    this.stageChangeHandler(
+                      e,
+                      this.state.stages[this.state.activeStage.type].next
+                    )
+                  }
+            >
+              {btnName}
+            </ButtonMUI>
+              // <Button
+              //   btnTypes={['Next', 'Bold']}
+              //   btnName={btnName}
+              //   disabled={!this.state.activeStage.next}
+              //   clickHandler={(e) =>
+              //     this.stageChangeHandler(
+              //       e,
+              //       this.state.stages[this.state.activeStage.type].next
+              //     )
+              //   }
+              // />
             );
           }}
         </ApptConfirm>
