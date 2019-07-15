@@ -7,7 +7,6 @@ import { ArrowBack, ArrowForward } from '@material-ui/icons';
 import { Button as ButtonMUI, IconButton } from '@material-ui/core';
 
 import { fetchScheduleGen, fetchAppts, editAppt } from '../../actions/actions';
-import Button from '../UI/Button';
 import ApptProgress from './ApptProgress';
 import ApptSpecialities from './ApptSpecialities';
 import ApptDoctors from './ApptDoctors';
@@ -42,9 +41,7 @@ const styleSheet = (theme) => ({
   BtnForw: {
     marginLeft: 'auto',
   },
-  BtnBack: {
-    
-  },
+  BtnBack: {},
 });
 
 class ApptEditor extends Component {
@@ -500,7 +497,7 @@ class ApptEditor extends Component {
     btnNext = (
       <div className={this.props.classes.BtnForw}>
         <IconButton
-          color="secondary"
+          color='secondary'
           disabled={!this.state.activeStage.next}
           onClick={(e) =>
             this.stageChangeHandler(
@@ -549,8 +546,8 @@ class ApptEditor extends Component {
             if (!buttonVisible) return null;
             return (
               <ButtonMUI
-              color="secondary"
-              size="small"
+                color='secondary'
+                size='small'
                 onClick={(e) =>
                   this.stageChangeHandler(
                     e,
@@ -560,7 +557,6 @@ class ApptEditor extends Component {
               >
                 Далее
               </ButtonMUI>
-
             );
           }}
         </ApptSpecialities>
@@ -576,8 +572,8 @@ class ApptEditor extends Component {
             if (!buttonVisible) return null;
             return (
               <ButtonMUI
-              color="secondary"
-              size="small"
+                color='secondary'
+                size='small'
                 onClick={(e) =>
                   this.stageChangeHandler(
                     e,
@@ -599,7 +595,7 @@ class ApptEditor extends Component {
       btnBack = (
         <div className={this.props.classes.BtnBack}>
           <IconButton
-            color="secondary"
+            color='secondary'
             disabled={!this.state.activeStage.prev}
             onClick={(e) =>
               this.stageChangeHandler(
@@ -655,20 +651,19 @@ class ApptEditor extends Component {
           {(btnName) => {
             return (
               <ButtonMUI
-              disableRipple
-              color='secondary'
-              size='medium'
-              disabled={!this.state.activeStage.next}
-              onClick={(e) =>
-                    this.stageChangeHandler(
-                      e,
-                      this.state.stages[this.state.activeStage.type].next
-                    )
-                  }
-            >
-              {btnName}
-            </ButtonMUI>
-             
+                disableRipple
+                color='secondary'
+                size='medium'
+                disabled={!this.state.activeStage.next}
+                onClick={(e) =>
+                  this.stageChangeHandler(
+                    e,
+                    this.state.stages[this.state.activeStage.type].next
+                  )
+                }
+              >
+                {btnName}
+              </ButtonMUI>
             );
           }}
         </ApptConfirm>

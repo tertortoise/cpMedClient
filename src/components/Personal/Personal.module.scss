@@ -6,7 +6,7 @@
   }
   .Contents {
     display: grid;
-    grid-template-columns: 20% minmax(min-content, max-content);
+    grid-template-columns: 20% minmax(max-content, 30%);
     grid-column-gap: $spacing;
     .Foto {
       .FotoPicture {
@@ -23,6 +23,7 @@
         .BtnUploadCont {
           display: flex;
           flex-direction: column;
+          
           .BtnUpload {
             text-align: center;
             position: relative;
@@ -51,6 +52,8 @@
     .Form {
       @include paper;
       .FormContents {
+        width: 90%;
+        margin: 0 auto;
       }
     }
   }

@@ -8,6 +8,7 @@ import { fetchPersonalImage } from '../../actions/actions';
 import blankImage from '../../images/imageBlank.svg';
 import PersonalData from './PersonalData';
 import PersonalPwr from './PersonalPwr';
+import { Button as ButtonMUI } from '@material-ui/core';
 import Button from '../UI/Button';
 
 class Personal extends Component {
@@ -54,7 +55,7 @@ class Personal extends Component {
         this.setState({
           fotoMsg:
             'Не удалось загрузить: выберете файл с расширением jp(e)g или png.',
-            fotoMsgError: true,
+          fotoMsgError: true,
         });
       } else if (file.size > 1048576 * 2) {
         this.setState({
@@ -89,27 +90,36 @@ class Personal extends Component {
         <div className={styles.BtnUploadCont}>
           <div className={styles.BtnUpload}>
             <input
-            type='file'
-            ref={this.inputFoto}
-            onChange={this.fotoUploadHandler}
-          />
-          
-          <Button
-            clickHandler={(e) => this.inputFoto.current.click()}
-            btnTypes={['Next']}
-            btnName='Загрузить фото'
-          />
+              type='file'
+              ref={this.inputFoto}
+              onChange={this.fotoUploadHandler}
+            />
+            <ButtonMUI
+              color='secondary'
+              size='medium'
+              onClick={(e) => this.inputFoto.current.click()}
+            >
+              Загрузить фото
+            </ButtonMUI>
           </div>
-          
-          <div className={clsx(styles.BtnUploadComment, this.state.fotoMsgError && styles.BtnUploadError)}>{this.state.fotoMsg}</div>
+          <div
+            className={clsx(
+              styles.BtnUploadComment,
+              this.state.fotoMsgError && styles.BtnUploadError
+            )}
+          >
+            {this.state.fotoMsg}
+          </div>
         </div>
         <div className={styles.BtnDelete}>
-          <Button
-            clickHandler={this.fotoDelete}
-            btnTypes={['Next']}
-            btnName='Удалить фото'
+          <ButtonMUI
+            color='secondary'
+            size='medium'
             disabled={this.state.blankImage}
-          />
+            onClick={this.fotoDelete}
+          >
+            Удалить фото
+          </ButtonMUI>
         </div>
       </div>
     ) : null;
@@ -154,7 +164,11 @@ class Personal extends Component {
         <div className={styles.Contents}>
           <div className={styles.Foto}>
             <div className={styles.FotoPicture}>
-              <img className={styles.Picture} width={150} src={this.props.personalImage} />
+              <img
+                className={styles.Picture}
+                width={150}
+                src={this.props.personalImage}
+              />
             </div>
             {fotoBtns}
           </div>
