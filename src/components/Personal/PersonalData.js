@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Button as ButtonMUI } from '@material-ui/core';
 
 import { fetchPersonalData } from '../../actions/actions';
 import validate from '../../utils/inputValidation';
@@ -276,17 +277,21 @@ class PersonalData extends Component {
 
     const buttons = renderButtons ? (
       <div className={styles.Buttons}>
-        <Button
-          clickHandler={(e) => this.changeStageHandler(e, 'cancel')}
-          btnTypes={['Next']}
-          btnName='Назад'
-        />
-        <Button
-          clickHandler={(e) => this.changeStageHandler(e, 'save')}
-          btnTypes={['Next']}
-          btnName='Сохранить'
-          disabled={saveBtnDisabled}
-        />
+        <ButtonMUI
+            color='secondary'
+            size='medium'
+            onClick={(e) => this.changeStageHandler(e, 'cancel')}
+          >
+            Не сохранять
+          </ButtonMUI>
+          <ButtonMUI
+            color='secondary'
+            size='medium'
+            disabled={saveBtnDisabled}
+            onClick={(e) => this.changeStageHandler(e, 'save')}
+          >
+            Сохранить
+          </ButtonMUI>
       </div>
     ) : null;
 

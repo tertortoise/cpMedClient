@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import clsx from 'clsx';
+import { Button as ButtonMUI } from '@material-ui/core';
 
 import styles from './Personal.module.scss';
 import { fetchPersonalImage } from '../../actions/actions';
 import blankImage from '../../images/imageBlank.svg';
 import PersonalData from './PersonalData';
 import PersonalPwr from './PersonalPwr';
-import { Button as ButtonMUI } from '@material-ui/core';
-import Button from '../UI/Button';
 
 class Personal extends Component {
   constructor(props) {
@@ -96,7 +95,7 @@ class Personal extends Component {
             />
             <ButtonMUI
               color='secondary'
-              size='medium'
+              size='small'
               onClick={(e) => this.inputFoto.current.click()}
             >
               Загрузить фото
@@ -114,7 +113,7 @@ class Personal extends Component {
         <div className={styles.BtnDelete}>
           <ButtonMUI
             color='secondary'
-            size='medium'
+            size='small'
             disabled={this.state.blankImage}
             onClick={this.fotoDelete}
           >
@@ -142,16 +141,20 @@ class Personal extends Component {
     /** buttons Edit Pwr and Edit Data */
     const buttons = elements.btnsEdit[currStage] ? (
       <div className={styles.Buttons}>
-        <Button
-          clickHandler={(e) => this.changeStage(e, 'editPwr')}
-          btnTypes={['Next']}
-          btnName='Изменить пароль'
-        />
-        <Button
-          clickHandler={(e) => this.changeStage(e, 'editData')}
-          btnTypes={['Next']}
-          btnName='Изменить Данные'
-        />
+        <ButtonMUI
+          color='secondary'
+          size='medium'
+          onClick={(e) => this.changeStage(e, 'editPwr')}
+        >
+          Изменить пароль
+        </ButtonMUI>
+        <ButtonMUI
+          color='secondary'
+          size='medium'
+          onClick={(e) => this.changeStage(e, 'editData')}
+        >
+          Изменить данные
+        </ButtonMUI>
       </div>
     ) : null;
 

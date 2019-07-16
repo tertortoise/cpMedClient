@@ -14,7 +14,6 @@
         .Picture {
           border-radius: 50%;
         }
-        
       }
       .FotoButtons {
         display: grid;
@@ -23,7 +22,7 @@
         .BtnUploadCont {
           display: flex;
           flex-direction: column;
-          
+
           .BtnUpload {
             text-align: center;
             position: relative;
@@ -58,5 +57,10 @@
     }
   }
   .Buttons {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
