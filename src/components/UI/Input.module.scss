@@ -1,64 +1,79 @@
-.Input {
-  label {
-    .LabelSpan {
-      color: grey;
-    }
-    .InputSpan {
-      input {
-        &:read-only {
-          background-color: lightgray;
-        }
-      }
-      span {
+@import '../../styles/theme.scss';
 
-      }
-    }
+.Input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: $spacing;
+  .LabelSpan {
+    order: -1;
+    color: grey;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  .InputSpan {
+    outline-style: none;
+    border-style: none;
+    border-bottom: 1px grey dotted;
+    font-size: 1.1rem;
+  }
+  .HelperSpan {
+    color: grey;
+    font-size: 0.7rem;
+    font-style: italic;
   }
 }
 
 .Editable {
-  label {
-    .LabelSpan {
-      color: black;
+  .LabelSpan {
+    color: $col-prim-dark;
+  }
+  .InputSpan {
+    border-bottom: 2px $col-prim-dark solid;
+    &:hover {
+      border-bottom: 2px $col-prim solid;
     }
-    .InputSpan {
-      input {
-        background-color: lightblue;
-      }
-      span {
-
-      }
+    &:focus {
+      border-bottom: 2px $col-prim solid;
     }
   }
+  .InputSpan:hover + .LabelSpan {
+    color: $col-prim;
+  }
+  .InputSpan:focus + .LabelSpan {
+    color: $col-prim;
+  }
+  
 }
 
 .Touched {
-  label {
-    .LabelSpan {
-
+  .LabelSpan {
+    color: $col-edited-dark;
+  }
+  .InputSpan {
+    border-bottom: 2px $col-edited-dark solid;
+    &:hover, &:focus {
+      border-bottom: 2px $col-edited solid;
     }
-    .InputSpan {
-      input {
-        background-color: lightgreen;
-      }
-      span {
-
-      }
-    }
+  }
+  .InputSpan:hover + .LabelSpan, .InputSpan:focus + .LabelSpan {
+    color: $col-edited;
   }
 }
 .Invalid {
-  label {
-    .LabelSpan {
-
-    }
-    .InputSpan {
-      input {
-        background-color: pink;
-      }
-      span {
-
-      }
+  .LabelSpan {
+    color: $col-error-dark;
+  }
+  .InputSpan {
+    border-bottom: 2px $col-error-dark solid;
+    &:hover, &:focus {
+      border-bottom: 2px $col-error solid;
     }
   }
+  .HelperSpan {
+    color: $col-error-dark;
+  }
+  .InputSpan:hover + .LabelSpan, .InputSpan:focus + .LabelSpan, .InputSpan:focus + .HelperSpan {
+    color: $col-error;
+  }
+  
 }

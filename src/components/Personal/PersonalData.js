@@ -176,7 +176,7 @@ class PersonalData extends Component {
           valid: true,
           touched: false,
           inputDefaultMessage:
-            'Латинские заглавные и/или строчные буквы и цифры, мин. 6, максимум 20 символов',
+            'латинские заглавные и/или строчные буквы и цифры, мин. 6, максимум 20 символов',
         },
       ],
     ]),
@@ -191,17 +191,11 @@ class PersonalData extends Component {
         data.set(key, { ...info, touched: false, valid: true });
       });
       this.props.fetchPersonalData(personalData);
-      data.forEach((info, key) => {
-        data.set(key, { ...info, touched: false, valid: true });
-      });
     } else if (type === 'cancel') {
-      console.log(type);
-      const personalData = { ...this.props.personalData };
-      const data = new Map(this.state.data);
       data.forEach((info, key) => {
         data.set(key, {
           ...info,
-          value: personalData[key],
+          value: this.props.personalData[key],
           touched: false,
           valid: true,
         });
@@ -311,6 +305,7 @@ class PersonalData extends Component {
             return (
               <Input
                 key={key}
+                id={key}
                 elementType={value.elementType}
                 value={value.value}
                 label={value.label}
