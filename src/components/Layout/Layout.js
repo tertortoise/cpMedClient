@@ -40,6 +40,8 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
+import Logo from '../UI/Logo';
+
 const drawerWidth = 200;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -360,7 +362,8 @@ function Layout(props) {
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <Paper className={classes.paper}>
-                <Mood className={classes.icon} />
+                {/* <Mood className={classes.icon} /> */}
+                <Logo />
                 <Typography variant='subtitle1' noWrap>
                   <span>Медицинский центр</span>
                   <span className={classes.logoSpan}>AMG-GROUP</span>

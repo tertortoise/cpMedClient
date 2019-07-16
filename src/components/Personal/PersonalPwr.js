@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Button as ButtonMUI } from '@material-ui/core';
 
 import { fetchPersonalPwr } from '../../actions/actions';
 import validate from '../../utils/inputValidation';
@@ -199,29 +200,35 @@ class PersonalPwr extends Component {
                   changed={(e) => this.changeInputHandler(e, key)}
                   inputMessage={inputMessage}
                 />
-                <Button
+                <ButtonMUI
                   key={'btnToggle' + key}
-                  clickHandler={(e) => this.toggleVisibility(e, key)}
-                  btnTypes={['Inline']}
-                  btnName='Показать'
+                  color='primary'
+                  size='small'
                   disabled={value.readOnly}
-                />
+                  onClick={(e) => this.toggleVisibility(e, key)}
+                >
+                  Показать пароль
+                </ButtonMUI>
               </Fragment>
             );
           })}
         </div>
         <div className={styles.Buttons}>
-          <Button
-            clickHandler={(e) => this.changeStageHandler(e, 'cancel')}
-            btnTypes={['Next']}
-            btnName='Назад'
-          />
-          <Button
-            clickHandler={(e) => this.changeStageHandler(e, 'save')}
-            btnTypes={['Next']}
-            btnName='Сохранить'
+          <ButtonMUI
+            color='secondary'
+            size='medium'
+            onClick={(e) => this.changeStageHandler(e, 'cancel')}
+          >
+            Назад
+          </ButtonMUI>
+          <ButtonMUI
+            color='secondary'
+            size='medium'
             disabled={saveBtnDisabled}
-          />
+            onClick={(e) => this.changeStageHandler(e, 'save')}
+          >
+            Сохранить
+          </ButtonMUI>
         </div>
       </Fragment>
     );

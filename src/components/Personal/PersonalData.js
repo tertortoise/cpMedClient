@@ -6,7 +6,6 @@ import { Button as ButtonMUI } from '@material-ui/core';
 import { fetchPersonalData } from '../../actions/actions';
 import validate from '../../utils/inputValidation';
 import styles from './Personal.module.scss';
-import Button from '../UI/Button';
 import Input from '../UI/Input';
 
 class PersonalData extends Component {
@@ -298,7 +297,7 @@ class PersonalData extends Component {
     return (
       <Fragment>
         <div className={styles.FormContents}>
-          <span>*поля обязательные для заполнения</span>
+          <span className={styles.Remark}>*поля обязательные для заполнения</span>
           {Array.from(data, ([key, value]) => {
             let inputMessage;
 

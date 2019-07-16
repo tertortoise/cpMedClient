@@ -1,13 +1,14 @@
-.Dash {
-  .Section {
+@import '../../styles/theme.scss';
 
-    &:hover {
-      background-color: grey;
-    }
-
+.Section {
+  @include paper;
+  padding: $spacing;
+  margin-bottom: $spacing;
+  &:hover {
+    background-color: $col-prim-light;
+    cursor: pointer;
   }
-  .Calendar {
-
-  }
-
+}
+.Calendar {
+  
 }

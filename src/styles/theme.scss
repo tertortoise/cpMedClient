@@ -1,6 +1,7 @@
 // colors
 $col-prim: #2AB5F4;
 $col-prim-dark: rgb(29, 126, 170);
+$col-prim-light: lighten($col-prim, 35%);
 $col-second: #f42ab5;
 $col-second-hover: lighten($col-second, 20%);
 $col-second-sel: lighten($col-second, 20%);

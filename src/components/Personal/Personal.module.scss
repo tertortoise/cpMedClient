@@ -6,9 +6,18 @@
   }
   .Contents {
     display: grid;
-    grid-template-columns: 20% minmax(max-content, 30%);
+    grid-template-columns: minmax(300px, 25%) minmax(420px, 30%);
     grid-column-gap: $spacing;
+
+    @media (max-width: 960px) {
+      grid-template-columns: 9fr 10fr;
+    }
+    @media (max-width: 600px) {
+      display: flex;
+      flex-flow: column;
+    }
     .Foto {
+      margin-bottom: $spacing;
       .FotoPicture {
         text-align: center;
         .Picture {
@@ -53,6 +62,15 @@
       .FormContents {
         width: 90%;
         margin: 0 auto;
+        .Remark {
+          color: lightgray;
+          font-size: 0.8rem;
+        }
+        & button {
+          font-size: 0.7rem;
+          padding: 0;
+
+        }
       }
     }
   }

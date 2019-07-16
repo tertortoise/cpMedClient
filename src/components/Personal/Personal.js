@@ -27,8 +27,8 @@ class Personal extends Component {
         personalData: { main: true, editData: true, editPwr: false },
         breadCrumbsExtra: {
           main: null,
-          editData: 'Редактирование данных',
-          editPwr: 'Изменение пароля',
+          editData: ' Редактирование данных',
+          editPwr: ' Изменение пароля',
         },
       },
     };

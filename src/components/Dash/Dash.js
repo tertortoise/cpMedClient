@@ -4,7 +4,6 @@ import moment from 'moment';
 
 import styles from './Dash.module.scss';
 import ApptsListLine from '../ApptsList/ApptsListLine';
-import PersonalData from '../Personal/PersonalData';
 import ReactCalendar from '../Calendar/Calendar';
 
 class Dash extends Component {
@@ -57,10 +56,6 @@ class Dash extends Component {
           <h2>Запланированные записи</h2>
           {apptsContents}
         </div>
-        <div onClick={(e) => this.clickHandler(e, '/personal')} className={styles.Section}>
-        <h2>Личные данные</h2>
-        <PersonalData renderButtons={false} dataInputsReadOnly={true} />
-        </div>
         <div className={styles.Calendar}>
           <ReactCalendar />
         </div>
@@ -74,7 +69,6 @@ Dash.propTypes = {};
 const mapStateToProps = (state) => {
   return {
     appts: state.appts,
-    personalData: state.personalData,
   };
 };
 
